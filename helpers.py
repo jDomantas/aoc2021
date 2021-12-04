@@ -3,16 +3,17 @@ import pathlib
 import sys
 
 
-def run(day, f):
+def run(day, f, only_test = False):
     test_inp = get_test_input(day)
     if test_inp is not None:
         print('--- with test input ---')
         f(test_inp)
     else:
         print('test-inputs/day{:02}.txt file is not present'.format(day))
-    print('--- with real input ---')
-    inp = get_input(day)
-    f(inp)
+    if not only_test:
+        print('--- with real input ---')
+        inp = get_input(day)
+        f(inp)
 
 
 def run_with_test_input(f):
