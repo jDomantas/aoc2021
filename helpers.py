@@ -1,19 +1,26 @@
 import requests
 import pathlib
 import sys
+from time import time
+
+
+def run_with_measure(f, inp):
+    start = time()
+    f(inp)
+    print('run time: {:.3f} seconds'.format(time() - start))
 
 
 def run(day, f, only_test = False):
     test_inp = get_test_input(day)
     if test_inp is not None:
         print('--- with test input ---')
-        f(test_inp)
+        run_with_measure(f, test_inp)
     else:
         print('test-inputs/day{:02}.txt file is not present'.format(day))
     if not only_test:
         print('--- with real input ---')
         inp = get_input(day)
-        f(inp)
+        run_with_measure(f, inp)
 
 
 def run_with_test_input(f):
